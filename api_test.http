@@ -1,0 +1,2 @@
+### Obtener lista de usuarios
+GET https://jsonplaceholder.typicode.com/users
