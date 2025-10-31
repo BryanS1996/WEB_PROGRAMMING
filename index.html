@@ -2,26 +2,24 @@
 <html lang="es">
 
 <head>
-    <meta charset="uft-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="style.css">
     <title>Prueba de Diagnostico</title>
 </head>
 
 <body>
-    
+    <div class="container mt-4">
     <h1 class="text-center">Web Programming</h1>
-    <h1 class="text-center">Programación Web</h1>
-
 
     <div class="row">
         <div class="col-sm-6">
             <div class="card text" style="width: 25rem; text-align: center;">
                 <div class="card-body">
                     <h5 class="card-title">Card 1</h5>
-                    <h5 class="card-title">Tarjeta 1</h5>
                     <img src="imagen1.jpg" alt="imagen_tarjeta" class="img-fluid col-md-6 float-md-end mb-3 ms-md-3">
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
 
@@ -30,17 +28,19 @@
                 </div>
             </div>
         </div>
-
-        <div class="card text" style="width: 25rem; text-align: center;">
-            <div class="card-body">
-                <h5 class="card-title">Card 2</h5>
-                <h5 class="card-title">Tarjeta 2</h5>
-                <img src="imagen2.jpg" alt="imagen_tarjeta" class="img-fluid col-md-6 float-md-end mb-3 ms-md-3">
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <button type="button" class="btn btn-success">Save</button>
+        <div class="col-sm-6">
+            <div class="card text" style="width: 25rem; text-align: center; margin: 0 auto;">
+                <div class="card-body">
+                    <h5 class="card-title">Card 2</h5>
+                    <img src="imagen2.jpg" alt="imagen_tarjeta" class="img-fluid col-md-6 float-md-end mb-3 ms-md-3">
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <button type="button" class="btn btn-success">Save</button>
+                </div>
             </div>
         </div>
+
+    </div>
 
 
         <p class="text-center"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -81,6 +81,25 @@
                 </tbody>
             </table>
         </div>
+        <!-- Sección donde se mostrarán los datos obtenidos desde una API -->
+        <section id="api-section" class="mt-4">
+            <div class="card" style="padding:1rem; max-width:900px; margin: 0 auto;">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem;">
+                    <h4 id="api-title" style="margin:0">Datos desde la API</h4>
+                    <div>
+                        <button id="api-reload" class="btn btn-primary btn-sm" type="button">Recargar</button>
+                    </div>
+                </div>
+                <div id="api-status" aria-live="polite" style="margin-bottom:.5rem; color:#555">Cargando datos...</div>
+                <ul id="api-list" style="list-style:none; padding:0; margin:0; display:grid; gap:0.75rem;
+                    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
+                    <!-- items añadidos por script.js -->
+                </ul>
+            </div>
+        </section>
+
+        <script src="script.js"></script>
+    </div> <!-- /.container -->
 </body>
 
 
