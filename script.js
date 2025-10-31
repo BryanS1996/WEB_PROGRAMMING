@@ -1,7 +1,9 @@
 // script.js - consumo de API y renderizado en index.html
 // Reemplaza API_URL por la URL de tu backend cuando la tengas.
 
-const API_URL = 'https://jsonplaceholder.typicode.com/posts?_limit=8'; // ejemplo de prueba
+const API_URL = 'https://jsonplaceholder.typicode.com/posts'; // example base endpoint
+const DEFAULT_LIMIT = 8; // number of items to fetch per request (used for example endpoint)
+const TOTAL_AVAILABLE = 100; // total items in the example API (JSONPlaceholder has 100 posts)
 
 const statusEl = document.getElementById('api-status');
 const listEl = document.getElementById('api-list');
@@ -11,12 +13,43 @@ const reloadBtn = document.getElementById('api-reload');
 function setReloadEnabled(enabled){
     if(!reloadBtn) return;
     reloadBtn.disabled = !enabled;
-    reloadBtn.textContent = enabled ? 'Recargar' : 'Cargando...';
+    reloadBtn.textContent = enabled ? 'Reload' : 'Loading...';
+}
+
+// Mezcla un array (Fisher-Yates) para presentar items en distinto orden cada recarga
+function shuffleArray(array){
+    const a = array.slice();
+    for(let i = a.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+function randomStart(){
+    const maxStart = Math.max(0, TOTAL_AVAILABLE - DEFAULT_LIMIT);
+    return Math.floor(Math.random() * (maxStart + 1));
+}
+
+function buildUrlForFetch(){
+    // If the user provided a template like ?_start={start}&_limit={limit}
+    if(API_URL.includes('{start}')){
+        return API_URL.replace('{start}', randomStart()).replace('{limit}', DEFAULT_LIMIT);
+    }
+
+    // Special handling for the JSONPlaceholder example: compose _start and _limit so each reload returns different items
+    if(API_URL.includes('jsonplaceholder.typicode.com')){
+        const base = API_URL.split('?')[0];
+        const start = randomStart();
+        return `${base}?_start=${start}&_limit=${DEFAULT_LIMIT}`;
+    }
+
+    // Default: return API_URL as-is (assume backend returns varying results or supports your query params)
+    return API_URL;
 }
 
 async function fetchData(url){
     showLoading('Cargando datos...');
-    setReloadEnabled(false);
     try{
         const res = await fetch(url);
         if(!res.ok) throw new Error(`HTTP ${res.status} - ${res.statusText}`);
@@ -87,16 +120,31 @@ async function init(){
         return;
     }
 
-    const data = await fetchData(API_URL);
-    if(data) renderItems(data);
-    // habilitar botón después de la carga (exitosa o no)
-    setReloadEnabled(true);
+    // deshabilitar botón mientras se carga
+    setReloadEnabled(false);
+    try{
+        const url = buildUrlForFetch();
+        const data = await fetchData(url);
+        if(data){
+            // si es arreglo, mezclar para variar el orden en cada recarga
+            const items = Array.isArray(data) ? shuffleArray(data) : [data];
+            renderItems(items);
+        }
+    } finally {
+        // siempre volver a habilitar el botón
+        setReloadEnabled(true);
+    }
 }
 
 // Auto-inicializar cuando el DOM esté listo
 if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', () => {
+        // attach click listener to reload button
+        if(reloadBtn) reloadBtn.addEventListener('click', init);
+        init();
+    });
 } else {
+    if(reloadBtn) reloadBtn.addEventListener('click', init);
     init();
 }
 
