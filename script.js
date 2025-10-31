@@ -49,15 +49,15 @@ function buildUrlForFetch(){
 }
 
 async function fetchData(url){
-    showLoading('Cargando datos...');
+    showLoading('Loading Data...');
     try{
         const res = await fetch(url);
         if(!res.ok) throw new Error(`HTTP ${res.status} - ${res.statusText}`);
         const data = await res.json();
-        showSuccess(`Cargados ${Array.isArray(data)?data.length:1} elementos`);
+        showSuccess(`Loaded ${Array.isArray(data)?data.length:1} items`);
         return data;
     }catch(err){
-        showError('Error al obtener datos: ' + err.message);
+        showError('Error fetching data: ' + err.message);
         console.error(err);
         return null;
     }
@@ -77,7 +77,7 @@ function renderItems(items){
     if(!listEl) return;
     listEl.innerHTML = '';
     if(!items || items.length === 0){
-        listEl.innerHTML = '<li>No hay elementos para mostrar.</li>';
+        listEl.innerHTML = '<li>No items to display.</li>';
         return;
     }
 
@@ -116,7 +116,7 @@ function escapeHtml(str){
 // Función principal que se ejecuta al cargar la página
 async function init(){
     if(!API_URL){
-        showError('No se ha configurado la URL de la API. Edita script.js.');
+        showError('API URL is not configured. Edit script.js.');
         return;
     }
 
