@@ -1,37 +1,39 @@
-# WEB_PROGRAMMING — Example frontend
+# 🧩 Pokédex App | Node.js + Express + Pokémon API
 
-This repository contains a simple static frontend (HTML/CSS/JS) that demonstrates how to fetch data from an API and render results in the browser.
+## 🇺🇸 English Version
 
-## Main files
-- `index.html` — main page with a section that displays API data and a "Reload" button.
-- `style.css` — custom styles.
-- `script.js` — logic to fetch data, show loading/success/error status and render items.
+### 📖 Description
+This project is a simple **Pokédex web app** that allows users to search for any Pokémon by name and view detailed information including:
+- Official image
+- Description
+- Abilities (translated into Spanish)
+- Habitat (if available)
 
-## Run locally
-1. Open PowerShell in the project folder and open the page in your default browser:
+The app uses a **Node.js + Express backend** that connects to the **PokéAPI** to fetch Pokémon data, and a **frontend built with HTML, CSS, and JavaScript**.
 
-```powershell
-cd C:\Users\BryanS\Desktop\Programación_Web\WEB_PROGRAMMING
-ii .\index.html
-```
+---
 
-2. The page will automatically fetch example data (JSONPlaceholder). Click the "Reload" button to fetch again.
+### 🚀 Technologies Used
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript (Fetch API)
+- **Backend:** Node.js, Express, CORS, node-fetch
+- **API:** [PokéAPI](https://pokeapi.co/)
+- **Deployment:** GitHub Pages (frontend) + local backend (or deployable to Render, Vercel, etc.)
 
+---
 
-Este repositorio contiene una página estática (HTML/CSS/JS) que muestra cómo consumir una API desde el frontend y renderizar resultados.
+### ⚙️ Installation and Setup
 
-Archivos principales
-- `index.html` — página principal con una sección para mostrar datos desde la API y un botón "Recargar".
-- `style.css` — estilos personalizados.
-- `script.js` — lógica para obtener datos desde una API, mostrar estados (cargando/éxito/error) y renderizar los elementos.
+#### 1. Clone the repository
+```bash
+git clone https://github.com/YOUR_USERNAME/WEB_PROGRAMMING.git
+cd WEB_PROGRAMMING/backend
 
-Cómo ejecutar
-1. Abre PowerShell en la carpeta del proyecto:
+#### 2. Install dependencies
+npm install express cors node-fetch@2
 
-```powershell
-cd C:\Users\BryanS\Desktop\Programación_Web\WEB_PROGRAMMING
-ii .\index.html
-```
+#### 3. Run the backend
+node server.js
 
-2. La página cargará automáticamente datos desde el endpoint de prueba (JSONPlaceholder). Usa el botón "Recargar" para volver a obtener datos.
+#### 4. Open the frontend
 
+Open index.html in your browser or host it with GitHub Pages
