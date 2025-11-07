@@ -28,12 +28,15 @@ The app uses a **Node.js + Express backend** that connects to the **PokéAPI** t
 git clone https://github.com/YOUR_USERNAME/WEB_PROGRAMMING.git
 cd WEB_PROGRAMMING/backend
 
-#### 2. Install dependencies
+---
+
+##### 2. Install dependencies
 npm install express cors node-fetch@2
+
 
 #### 3. Run the backend
 node server.js
 
 #### 4. Open the frontend
 
-Open index.html in your browser or host it with GitHub Pages
+Open index.html in your browser 
