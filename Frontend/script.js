@@ -14,7 +14,7 @@ btn.addEventListener("click", async () => {
 
   try {
     // 1️⃣ Pide datos al backend (descripción)
-    const res = await fetch(`http://localhost:3000/pokemon/${nombre}`);
+    const res = await fetch(`/api/pokemon/${nombre}`);
     const data = await res.json();
 
     if (data.error) {

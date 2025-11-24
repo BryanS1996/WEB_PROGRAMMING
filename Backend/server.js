@@ -29,4 +29,5 @@ app.get("/pokemon/:nombre", async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log("✅ Servidor corriendo en http://localhost:3000"));
+// ❗ IMPORTANTE: NO usar app.listen() en Vercel
+module.exports = app;
